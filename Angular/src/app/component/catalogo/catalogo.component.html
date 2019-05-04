@@ -1,0 +1,39 @@
+
+<div class="container">
+  <div class="busqueda">
+    <div class="row">
+      <div class="col s6">
+        <h4>Catálogo de productos</h4>
+      </div>
+      <div class="col s3 offset-s3">
+        <label for="">¿Que estas buscando?</label>
+        <input type="text" id="buscador" placeholder="aguacate" (input)="filtrarCatalogo(buscar.value)"  #buscar>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="catalogo">
+    <div class="row">
+      <div class="col s3" *ngFor="let item of listaProductos">
+        <div class="producto" >
+          <div class="imagen">
+            <img src="../../assets/img/{{item.imagen}}" alt="...">
+          </div>
+          <span class="title" >{{item.nombre}}</span>
+          <div>
+            <p><b>Precio: </b>{{item.precio | currency : 'USD' : 1-0-2}}</p>
+            <p><b>Disponibles: </b>{{item.disponible ? item.disponible : 'Agotado'}}</p>
+          </div>
+          <div class="botones-cont">
+            <a (click)="verMas(item)" class="vermas" role="button">Ver más</a>
+            <div class="anadir-cont">
+              <a class="add" role="button" (click)="addCanasta(item, cantidad.value)">Añadir</a>
+              <input type="number" value="1" min="1" max="{{item.disponible}}" [disabled]="(item.disponible <= 0)" #cantidad>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
